@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ValidateConfigFile">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,7 +12,7 @@
     <None Update="config.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
-  <Target Name="ValidateConfigFile">
+  <Target Name="ValidateConfigFile" BeforeTargets="BeforeBuild">
     <Error Text="config.json is missing" Condition="!Exists('config.json')" />
   </Target>
 

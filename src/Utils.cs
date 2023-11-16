@@ -10,7 +10,7 @@ class Utils : IDisposable
 
     public Utils()
     {
-        var json = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "secret.json")));
+        var json = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "config.json")));
         hostname = json.GetValueOrDefault("hostname", "");
         token = json.GetValueOrDefault("token", "");
         secret = json.GetValueOrDefault("secret", "");
