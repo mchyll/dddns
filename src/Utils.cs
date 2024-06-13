@@ -16,18 +16,20 @@ class Utils : IDisposable
         secret = json.GetValueOrDefault("secret", "");
     }
 
+    public string Hostname => hostname;
+
     public async Task<string> GetCurrentIp()
     {
         return await client.GetStringAsync("https://api.ipify.org/");
     }
 
-    public async Task<string> GetHostIp()
+    public async Task<string> GetDnsIp()
     {
-        var hostEntry = await Dns.GetHostEntryAsync(hostname);
-        return hostEntry.AddressList.First().ToString();
+        var dnsEntry = await Dns.GetHostEntryAsync(hostname);
+        return dnsEntry.AddressList.First().ToString();
     }
 
-    public async Task UpdateHostIp(string ip)
+    public async Task UpdateDnsIp(string ip)
     {
         var message = new HttpRequestMessage(HttpMethod.Get, $"https://api.domeneshop.no/v0/dyndns/update?hostname={hostname}&myip={ip}");
         message.Headers.Authorization = new("Basic", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{token}:{secret}")));
